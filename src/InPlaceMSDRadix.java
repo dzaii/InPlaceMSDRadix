@@ -52,9 +52,6 @@ public class InPlaceMSDRadix {
             if ((arr[startPlusLeft] & digit) != 0)
                 startPlusLeft++;
 
-        if (startPlusLeft < start) {
-            startPlusLeft = start;
-        }
 
         if (startPlusLeft > start + 1)
             sorting(arr, start, startPlusLeft, digit >> 1);
@@ -93,16 +90,35 @@ public class InPlaceMSDRadix {
             if ((arr[startPlusLeft] & digit) != 0)
                 startPlusLeft++;
 
-        if (startPlusLeft < start) {
-            startPlusLeft = start;
-        }
-
-
         if (startPlusLeft > start + 1)
             sorting(arr, start, startPlusLeft, digit >> 1);
 
-        if (end >= startPlusLeft + 2)
+        if (end > startPlusLeft + 1)
             sorting(arr, startPlusLeft, end, digit >> 1);
+    }
+    public static void main(String[] args) {
+
+        int[] mat = new int[100000000];
+        Random r = new Random();
+        for (int i = 0; i < mat.length; i++) {
+            mat[i] = r.nextInt(100000000);
+        }
+
+        long begTime = System.currentTimeMillis();
+            Sort(mat);
+
+        long endTime = System.currentTimeMillis();
+        System.out.printf("Total time : %d ms\n", (endTime - begTime));
+
+        for (int i = 0; i < mat.length - 1; i++) {
+            if (mat[i] < mat[i + 1]) {
+                System.out.println();
+                System.out.println("No good");
+                System.out.println(mat[i] + " " + mat[i + 1]);
+                break;
+            }
+        }
+        System.out.println("haha");
     }
 }
 
